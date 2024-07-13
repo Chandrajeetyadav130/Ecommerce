@@ -1,0 +1,122 @@
+.login_signup_container{
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(209, 211, 212);
+}
+.login_signup_box{
+    width: 25vw;
+    height: 70vh;
+    box-sizing:border-box;
+    overflow: hidden;
+    background-color: white;
+}
+
+
+
+.loginform{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 2vmax;
+    margin: auto;
+    height: 70%;
+
+}
+
+.loginform>div>input{
+    width: 100%;
+    border: none;
+    outline: 1px solid rgb(218, 216, 216);
+    padding:2px 5px;
+}
+.loginform>a{
+    text-decoration: none;
+    color: rgb(134, 136, 138);
+    align-self: flex-end;
+    transition: all 0.5s;
+}
+.loginform>a:hover{
+    color: rgb(74, 217, 74);
+}
+.loginBtn,.signupBtn{
+    border: none;
+    outline: 1px solid rgb(131, 127, 127);
+    background-color: rgb(233, 167, 156);
+    color: #fff;
+    border-radius: 5px;
+}
+.loginBtn:hover,.signupBtn:hover{
+    background-color: tomato;
+    transform: scale(1.0);
+
+}
+
+/* signup form */
+.signUpForm{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding: 2vmax;
+    margin: auto;
+    height: 95%;
+}
+.signUpForm>div>input{
+    width: 100%;
+    border: none;
+    outline: 1px solid rgb(218, 216, 216);
+}
+.signup_input_padding>input{
+    padding: 0px 1vmax;
+}
+.login_register_forgot_div{
+    display: flex;
+    justify-content: space-between;
+}
+.login_register_forgot_div>a{
+    text-decoration: none;
+    color: rgb(134, 136, 138);
+    transition: all 0.5s;
+}
+.login_register_forgot_div>a:hover{
+    color: rgb(74, 217, 74);
+}
+.signUpForm>a{
+    text-decoration: none;
+    color: rgb(134, 136, 138);
+    transition: all 0.5s; 
+}
+.signUpForm>a:hover{
+ color: aquamarine;
+}
+#registeImage>input::file-selector-button{
+    width: 100%;
+    padding:0px 1vmax;
+    border: none;
+    background-color: rgba(146, 143, 143, 0.5);
+    z-index: 2;
+    margin: 0%;
+    outline: none;
+    color: #fff;
+}
+#registeImage>input::file-selector-button:hover{
+    background-color: rgb(207, 207, 204);
+    transition: all 0.5s;
+}
+#registeImage>img{
+    width: 4vmax;
+    height: 4vmax;
+    margin: 10px 0px;
+}
+@media(max-width:900px){
+    .login_signup_box{
+        width: 70%;
+    }
+}
+
