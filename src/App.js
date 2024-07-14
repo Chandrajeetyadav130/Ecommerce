@@ -10,10 +10,22 @@ import Products from "./component/Product/Products.js"
 import Search from './component/Product/Search.js';
 import Login from "./component/User/Login.js"
 import SignUp from './component/User/SignUp.js';
+import store from "./store.js"
+import { loadUser } from './actions/userAction.js';
+import { useEffect } from 'react';
+import UserOptions from './component/layout/Header/UserOptions.js';
+import { useSelector,useDispatch } from 'react-redux';
 function App() {
+  const {user,isAuthenticated}=useSelector(state=>state.userReducer)
+  console.log(user)
+  useEffect(()=>{
+  store.dispatch(loadUser())
+
+  },[])
   return (
     <Router>
       <Header />
+      {isAuthenticated && <UserOptions user={user}/>}
       <Routes>
       <Route exact path='/' Component={Home}/>
       <Route exact path='/product/:id' Component={ProductDetails}/>

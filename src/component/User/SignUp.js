@@ -1,11 +1,13 @@
-import React, { useState } from "react"
-import { Link } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { register } from "../../actions/userAction"
 import {useSelector,useDispatch} from "react-redux"
-
+import { toast } from 'react-toastify';
+import { clearError } from "../../actions/userAction";
 import "./loginSignup.css"
 const SignUp = () => {
-    const {}=useSelector(state=>state.userReducer)
+    const navigate=useNavigate()
+    const {isAuthenticated,error}=useSelector(state=>state.userReducer)
     const dispatch=useDispatch()
     const [user, setUser] = useState({
         name: "",
@@ -15,7 +17,17 @@ const SignUp = () => {
     const [avatar, setAvatar] = useState("")
     const [avatarPreview, setAvatarPreview] = useState("/logo192.png")
     const { name, email, password } = user
-
+      useEffect(()=>{
+          if(error){
+            toast(error)
+            dispatch(clearError())
+          }
+        //   if(isAuthenticated){
+        //     // toast("Register Successfully")
+        //     navigate("/login")
+    
+        //    }
+      },[navigate,isAuthenticated,dispatch,error])
     const registerSubmit = (e) => {
         e.preventDefault()
         const myForm = new FormData()
@@ -42,6 +54,7 @@ const SignUp = () => {
             setUser({ ...user, [e.target.name]: e.target.value })
         }
     }
+ 
 
     return (
         <React.Fragment>

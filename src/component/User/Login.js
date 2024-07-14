@@ -24,6 +24,7 @@ const Login = () => {
 
         navigate("/account")
 
+
        }
       
     },[alert,error,dispatch,navigate,isAuthenticated,loading])
