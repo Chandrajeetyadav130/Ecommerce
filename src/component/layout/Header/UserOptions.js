@@ -19,7 +19,7 @@ const UserOptions=({user})=>{
         {icon:<GoPersonFill/>,name:"Profile",fun:account},
         {icon:<MdExitToApp/>,name:"Logout",fun:logoutuser}
     ]
-    console.log(user?.role)
+    // console.log(user?.role)
     if(user?.role==="admin"){
         options.unshift({
             icon:<MdDashboard/>,
@@ -39,8 +39,8 @@ const UserOptions=({user})=>{
     }
     function logoutuser(){
         dispatch(logout())
-        // navigate("/logout")
         toast("Logout successfully")
+
     }
 
     return(
