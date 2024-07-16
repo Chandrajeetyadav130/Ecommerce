@@ -1,13 +1,15 @@
 import {createStore,applyMiddleware,combineReducers} from "redux"
 import {thunk} from "redux-thunk"
 import { productReducer,productDetailsReducer } from "./reducers/productReducer"
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import { compose } from "redux";
-import { userReducer } from "./reducers/userReducer";
+import { userReducer,profileReducer ,forgotPassword} from "./reducers/userReducer";
 const reducer=combineReducers({
     product:productReducer,
     productDetails:productDetailsReducer,
-    userReducer:userReducer
+    userReducer:userReducer,
+    profileReducer:profileReducer,
+    forgotPassword:forgotPassword
 })
 // const composeEnhancers = composeWithDevTools({});
 const composeEnhancers = (process.env.NODE_ENV === 'development' && typeof window !== 'undefined' )?window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose: compose;

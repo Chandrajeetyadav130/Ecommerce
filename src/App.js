@@ -18,6 +18,9 @@ import { useSelector } from 'react-redux';
 import Profile from './component/User/Profile.js';
 import React from 'react';
 import ProtectedRoute from './component/Route/ProtectedRoute.js';
+import UpdateProfile from './component/User/UpdateProfile.js';
+import UpdatePassword from './component/User/UpdatePassword.js';
+import ForgotPassword from './component/User/ForgotPassword.js';
 function App() {
   const { user, isAuthenticated } = useSelector(state => state.userReducer)
   console.log(user)
@@ -30,15 +33,33 @@ function App() {
       <Header />
       {isAuthenticated && <UserOptions user={user} />}
       <Routes>
-        <Route exact path='/' element={<Home/>} />
-        <Route exact path='/product/:id' element={<ProductDetails/>} />
-        <Route exact path='/products' element={<Products/>} />
-        <Route path='/products/:keyword' element={<Products/>} />
-        <Route exact path='/login' element={<Login/>} />
-        <Route exact path='/signUp' element={<SignUp/>} />
+        <Route exact path='/' element={<Home />} />
+        <Route exact path='/product/:id' element={<ProductDetails />} />
+        <Route exact path='/products' element={<Products />} />
+        <Route path='/products/:keyword' element={<Products />} />
+        <Route exact path='/login' element={<Login />} />
+        <Route exact path='/signUp' element={<SignUp />} />
         <Route exact path='/account'
           element={<ProtectedRoute isAuthenticated={isAuthenticated}>
-                 <Profile/>
+            <Profile />
+          </ProtectedRoute>
+          }
+        />
+        <Route exact path='/me/update'
+          element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+            <UpdateProfile />
+          </ProtectedRoute>
+          }
+        />
+        <Route exact path='/password/update'
+          element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+            <UpdatePassword />
+          </ProtectedRoute>
+          }
+        />
+          <Route exact path='/password/forgot'
+          element={<ProtectedRoute isAuthenticated={isAuthenticated}>
+            <ForgotPassword />
           </ProtectedRoute>
           }
         />
@@ -46,7 +67,7 @@ function App() {
         {/* {isAuthenticated &&<Route exact path='/account' element={<Profile/>}/>} */}
 
 
-        <Route exact path='/search' element={<Search/>} />
+        <Route exact path='/search' element={<Search />} />
 
 
 
