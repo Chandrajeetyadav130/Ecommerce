@@ -21,13 +21,15 @@ import {
 
 }
     from "../constants/useConstant"
+const baseUrl="https://ecommercebackend-hdlo.onrender.com"
+
     // Login action
 export const login = (email, password) => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOGIN_REQUEST })
             const config = { headers: { "Content-Type": "application/json" } }
-            const { data } = await axios.post(`/api/v1/login`,
+            const { data } = await axios.post(`${baseUrl}/api/v1/login`,
                 { email, password },
                 config
             )
@@ -45,7 +47,7 @@ export const register = (userData) => {
         try {
             dispatch({ type: REGISTER_REQUEST })
             const config = { headers: { "Content-Type": "multipart/form-data" } }
-            const { data } = await axios.post("/api/v1/register", userData, config)
+            const { data } = await axios.post(`${baseUrl}/api/v1/register`, userData, config)
             dispatch({ type: REGISTER_SUCCESS, payload: data.user })
         } catch (error) {
             dispatch({
@@ -60,7 +62,7 @@ export const loadUser = () => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOAD_USER_REQUEST })
-            const { data } = await axios.get(`/api/v1/me`)
+            const { data } = await axios.get(`${baseUrl}/api/v1/me`)
             console.log(data)
 
             dispatch({ type: LOAD_USER_SUCCESS, payload:data.user })
@@ -74,7 +76,7 @@ export const loadUser = () => {
 export const logout = () => {
     return async (dispatch) => {
         try {
-            await axios.get(`/api/v1/logout`)
+            await axios.get(`${baseUrl}/api/v1/logout`)
             dispatch({ type: LOGOUT_SUCCESS })
 
 
@@ -90,7 +92,7 @@ export const updateProfile = (userData) => {
         try {
             dispatch({ type: UPDATE_PROFILE_REQUEST })
             const config = { headers: { "Content-Type": "multipart/form-data" } }
-            const { data } = await axios.put("/api/v1/me/update", userData, config)
+            const { data } = await axios.put(`${baseUrl}/api/v1/me/update`, userData, config)
             console.log(data)
             dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success })
         } catch (error) {
@@ -107,7 +109,7 @@ export const updatePassword = (passwords) => {
         try {
             dispatch({ type: UPDATE_PASSWORD_REQUEST })
             const config = { headers: { "Content-Type": "application/json" } }
-            const { data } = await axios.put("/api/v1/password/update", passwords, config)
+            const { data } = await axios.put(`${baseUrl}/api/v1/password/update`, passwords, config)
             console.log(data)
             dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success })
         } catch (error) {

@@ -8,13 +8,15 @@ import {
     PRODUCT_DETAILS_FAIL
 } from "../constants/productCosntant"
 import axios from "axios"
+const baseUrl="https://ecommercebackend-hdlo.onrender.com"
+
 export const  getProductAction=(keyword="",currentPage=1,price=[0,30000],ratings=0)=>{
   return async (dispatch)=>{
    try {
     dispatch({
         type:ALL_PRODUCT_REQUEST
     })
-    let link=`/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}}}`//here page is defined keyword from backend url
+    let link=`${baseUrl}/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}}}`//here page is defined keyword from backend url
 //    if(category){
 //      link=`/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}}`//here page is defined keyword from backend url
 //    }
@@ -40,7 +42,7 @@ export const  getProductDetails=(id)=>{
       dispatch({
           type:PRODUCT_DETAILS_REQUEST
       })
-      const {data}=await axios.get(`/api/v1/products/${id}`)
+      const {data}=await axios.get(`${baseUrl}/api/v1/products/${id}`)
       console.log(data)
       dispatch({
           type:PRODUCT_DETAILS_SUCCESS,
