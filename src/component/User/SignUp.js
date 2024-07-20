@@ -27,7 +27,7 @@ const SignUp = () => {
         //     navigate("/login")
     
         //    }
-      },[navigate,isAuthenticated,dispatch,error])
+      },[navigate,dispatch,error])
     const registerSubmit = (e) => {
         e.preventDefault()
         const myForm = new FormData()
@@ -36,6 +36,9 @@ const SignUp = () => {
         myForm.set("password", password)
         myForm.set("avatar", avatar)
         dispatch(register(myForm))
+        //     navigate("/login")
+     
+
         console.log("signup submit");
     }
     const registerDataChange = (e) => {

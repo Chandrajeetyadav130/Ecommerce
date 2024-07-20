@@ -8,15 +8,19 @@ import SpeedDialAction from '@mui/material/SpeedDialAction';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { logout } from '../../../actions/userAction';
-import { useDispatch } from 'react-redux';
+import { MdShoppingCart } from "react-icons/md";
+import { useDispatch,useSelector } from 'react-redux';
 import "./Header.css"
 const UserOptions=({user})=>{
     const dispatch=useDispatch()
+    const {cartItems}=useSelector(state=>state.cart)
     const navigate=useNavigate()
     const [open,setOpen]=useState(false)
     const options=[
         {icon:<MdListAlt/>,name:"Order",fun:order},
         {icon:<GoPersonFill/>,name:"Profile",fun:account},
+        {icon:<MdShoppingCart style={{color:cartItems.length>0?"green":"unset"}}/>,name:`Cart${cartItems.length}`,fun:cart},
+
         {icon:<MdExitToApp/>,name:"Logout",fun:logoutuser}
     ]
     // console.log(user?.role)
@@ -37,6 +41,9 @@ const UserOptions=({user})=>{
     function account(){
         navigate("/account")
     }
+    function cart(){
+        navigate("/cart")
+    }
     function logoutuser(){
         dispatch(logout())
         toast("Logout successfully")
@@ -53,6 +60,7 @@ const UserOptions=({user})=>{
             open={open}
             style={{zIndex:"11"}}
             direction='down'
+            tooltipOpen={window.innerWidth<600?true:false}
             icon={<img  className='speed_dial_icon' src={user?.avatar.url?user.avatar.url:"/logo192.png"} alt='Profile'/>}
             >
                 {options.map((val,id)=>(<SpeedDialAction

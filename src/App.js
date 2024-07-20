@@ -21,6 +21,7 @@ import ProtectedRoute from './component/Route/ProtectedRoute.js';
 import UpdateProfile from './component/User/UpdateProfile.js';
 import UpdatePassword from './component/User/UpdatePassword.js';
 import ForgotPassword from './component/User/ForgotPassword.js';
+import Cart from './component/cart/Cart.js';
 function App() {
   const { user, isAuthenticated } = useSelector(state => state.userReducer)
   console.log(user)
@@ -34,6 +35,8 @@ function App() {
       {isAuthenticated && <UserOptions user={user} />}
       <Routes>
         <Route exact path='/' element={<Home />} />
+        <Route exact path='/cart' element={<Cart/>}/>
+
         <Route exact path='/product/:id' element={<ProductDetails />} />
         <Route exact path='/products' element={<Products />} />
         <Route path='/products/:keyword' element={<Products />} />
@@ -58,10 +61,7 @@ function App() {
           }
         />
           <Route exact path='/password/forgot'
-          element={<ProtectedRoute isAuthenticated={isAuthenticated}>
-            <ForgotPassword />
-          </ProtectedRoute>
-          }
+          element={<ForgotPassword />}
         />
 
         {/* {isAuthenticated &&<Route exact path='/account' element={<Profile/>}/>} */}

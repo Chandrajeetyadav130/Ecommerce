@@ -1,0 +1,115 @@
+.NoProductcartContaier{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    flex-direction: column;
+}
+.NoProductcartContaier>a{
+    text-decoration: none;
+    color: rgb(80, 83, 80);
+}
+.NoProductcartContaier>a:hover{
+    color: rgb(32, 194, 54);
+}
+.cartPage{
+    width:100%;
+    height:1000px;
+    margin-top: 8vmax;
+
+}
+.cartHeader{
+  background-color: tomato;
+  width: 90%;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
+  margin: auto;
+}
+.cartHeader>p{
+    margin: 1vmax;
+    color: white;
+}
+.cartContainer{
+ width: 90%;
+ display: grid;
+ grid-template-columns: 4fr 1fr 1fr;
+ margin: auto;
+ height: 120px;
+}
+.cartHeader>p:last-child{
+    text-align: end;
+}
+.subtotal{
+    text-align:end;
+}
+.cartInput{
+    /* border: 1px solid rgb(233, 229, 229); */
+    height:28px;
+}
+.cartInput>button{
+    border: none;
+    width: 20px;
+    background-color: gray;
+    color: white;
+}
+.cartInput>input{
+    width: 3vmax;
+    text-align: center;
+    border-style: none;
+}
+
+.cartGrossProfit{
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+}
+.cartGrossProfitBox{
+    border-top: 3px solid tomato;
+    margin: 1vmax 4.5vmax;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+.cartGrossProfitBox>p{
+    font:300 1.2vmax "roboto";
+    color: #000;
+    margin-top: 4px;
+
+
+}
+.checkoutBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+.checkoutBtn>button{
+    margin: 1vmax 4.5vmax;
+    border-style: none;
+    background-color: tomato;
+    color: white;
+    border-radius: 10px;
+    width: 50%;
+    padding: 3px 10px;
+}
+@media(max-width:700px){
+.checkoutBtn>button{
+    width: 100%;
+}
+.cartGrossProfitBox>p{
+    font:300 2.2vmax "roboto";
+}
+.cartHeader{
+    width: 100%;
+  grid-template-columns: 3fr 1fr 1fr;
+
+}
+.cartContainer{
+    width: 100%;
+    grid-template-columns: 2fr 1fr 1fr;
+   }
+   .cartGrossProfit{
+    display: grid;
+    grid-template-columns: 0fr 2fr;
+   }
+}
+

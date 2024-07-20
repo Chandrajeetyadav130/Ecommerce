@@ -1,0 +1,10 @@
+.cardItemCard{
+    display: flex;
+    align-items: center;
+    height: 100px;
+    gap: 10px;
+}
+.cardItemCard>img{
+    width: 6vmax;
+    height: 8vmax;
+}

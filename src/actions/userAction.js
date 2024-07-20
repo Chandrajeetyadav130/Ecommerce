@@ -1,4 +1,5 @@
 import axios from "axios"
+import { setToken, } from "./tokens";
 import {
     LOGIN_REQUEST,
     LOGIN_FAIL,
@@ -21,7 +22,11 @@ import {
 
 }
     from "../constants/useConstant"
+// import Cookies from 'js-cookie';
+
 const baseUrl="https://ecommercebackend-hdlo.onrender.com"
+
+
 
     // Login action
 export const login = (email, password) => {
@@ -34,6 +39,10 @@ export const login = (email, password) => {
                 config
             )
             dispatch({ type: LOGIN_SUCCESS,payload:data.user })
+            setToken(data.token)
+            // const gettokenfromapi=data.token;
+            // console.log("api token",gettokenfromapi)
+            // dispatch({type:SET_COOKIES,payload:data.token})
 
             console.log(data)
         } catch (error) {
@@ -48,6 +57,8 @@ export const register = (userData) => {
             dispatch({ type: REGISTER_REQUEST })
             const config = { headers: { "Content-Type": "multipart/form-data" } }
             const { data } = await axios.post(`${baseUrl}/api/v1/register`, userData, config)
+        
+
             dispatch({ type: REGISTER_SUCCESS, payload: data.user })
         } catch (error) {
             dispatch({
@@ -59,6 +70,7 @@ export const register = (userData) => {
 }
 // Load user information if login
 export const loadUser = () => {
+    
     return async (dispatch) => {
         try {
             dispatch({ type: LOAD_USER_REQUEST })
@@ -77,6 +89,7 @@ export const logout = () => {
     return async (dispatch) => {
         try {
             await axios.get(`${baseUrl}/api/v1/logout`)
+            
             dispatch({ type: LOGOUT_SUCCESS })
 
 

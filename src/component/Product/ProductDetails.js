@@ -7,22 +7,25 @@ import { useParams } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard"
 import Loader from "../layout/Loader/Loader"
-import {useAlert} from "react-alert"
+import { useAlert } from "react-alert"
 import { clearProductError } from "../../actions/productAction";
 import MetaData from "../layout/MetaData";
+import { useState } from "react";
+import { addItemsToCart } from "../../actions/cartAction";
 const ProductDetails = () => {
-    const alert=useAlert()
+    const [quantity, setQuantity] = useState(1)
+    const alert = useAlert()
     const { id } = useParams();
-    const { loading,  product,error  } = useSelector((state) => state.productDetails)//access the store state
+    const { loading, product, error } = useSelector((state) => state.productDetails)//access the store state
     console.log(product)
     const dispatch = useDispatch()
     useEffect(() => {
-        if(error){
-             alert.error(error)
-             dispatch(clearProductError())
+        if (error) {
+            alert.error(error)
+            dispatch(clearProductError())
         }
         dispatch(getProductDetails(id))
-    }, [dispatch,id,alert,error])
+    }, [dispatch, id, alert, error])
     const options = {
         edit: false,
         color: "rgba(20,20,20,0.1)",
@@ -31,11 +34,31 @@ const ProductDetails = () => {
         value: product?.ratings,
         isHalf: true
     }
+    const incrementQuantity = () => {
+        // const qty = quantity;
+
+        if (product.stock<=quantity){
+            return
+        }
+        setQuantity(quantity=>quantity+1)
+
+    }
+    const decrementQuantity = () => {
+        if(1>=quantity){
+            return
+        }
+      setQuantity(quantity=>quantity-1)
+       
+    }
+    const handleAddTocart=()=>{
+        dispatch(addItemsToCart(id,quantity))
+        alert.success(`${quantity}  products added to cart`)
+    }
     return (
         <React.Fragment>
-            {loading?<Loader /> : (
+            {loading ? <Loader /> : (
                 <React.Fragment>
-                    <MetaData title={`${product.name}--Ecommerce`}/>
+                    <MetaData title={`${product.name}--Ecommerce`} />
                     <div className="ProductDetail">
                         <div className="carousal_cont">
                             <div className="productCaroselCont">
@@ -67,12 +90,12 @@ const ProductDetails = () => {
                                 <h1>₹{product.price}</h1>
                                 <div className="inc_dec_addToCart_cont">
                                     <div className="product_detail_inc_dec_btn">
-                                        <button>-</button>
-                                        <input type="number" value="1" />
-                                        <button>+</button>
+                                        <button onClick={decrementQuantity}>-</button>
+                                        <input readOnly type="number" value={quantity} />
+                                        <button onClick={incrementQuantity}>+</button>
                                     </div>
 
-                                    <button className="add_tocart_btn">Add to cart</button>
+                                    <button onClick={handleAddTocart} className="add_tocart_btn">Add to cart</button>
                                 </div>
 
                                 <p>status <b className={product.Stock < 1 ? "redColor" : "greenColor"}>{product.status < 1 ? "OutOfStock" : "InStock"}</b></p>
