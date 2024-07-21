@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom"
 import { useLocation } from "react-router-dom"
 const Login = () => {
     const location=useLocation()
-    const { error, loading, success, isAuthenticated } = useSelector(state => state.userReducer)
+    const { error, loading, isAuthenticated } = useSelector(state => state.userReducer)
     const navigate = useNavigate()
     const alert = useAlert()
     const dispatch = useDispatch()

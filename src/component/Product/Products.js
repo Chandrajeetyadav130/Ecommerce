@@ -29,7 +29,7 @@ const Products = () => {
     const [price, setPrice] = useState([0, 30000])
     const [category, setCategory] = useState("")
     const [ratings, setRatings] = useState(0)
-    const { product, loading, error, productCount, resultPerpage, filteredProductsCount } = useSelector(state => state.product)
+    const { product, loading, error, productCount, resultPerpage } = useSelector(state => state.product)
     const dispatch = useDispatch()
     const setCurrentPageNo = (e) => {
         setCurrentPage(e)
@@ -41,7 +41,7 @@ const Products = () => {
             dispatch(clearProductError())
         }
         dispatch(getProductAction(keyword, currentPage, price, category, ratings))
-    }, [dispatch, keyword, currentPage, price, ratings,alert,error])
+    }, [dispatch, keyword, currentPage, price, ratings,alert,error,category])
     const priceHandler = (event, newPrice) => {
         // console.log(newPrice)
         setPrice(newPrice)

@@ -7,7 +7,7 @@ import { clearError } from "../../actions/userAction";
 import "./loginSignup.css"
 const SignUp = () => {
     const navigate=useNavigate()
-    const {isAuthenticated,error}=useSelector(state=>state.userReducer)
+    const {error}=useSelector(state=>state.userReducer)
     const dispatch=useDispatch()
     const [user, setUser] = useState({
         name: "",
