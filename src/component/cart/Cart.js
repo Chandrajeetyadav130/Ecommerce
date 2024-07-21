@@ -12,7 +12,7 @@ const Cart = () => {
     const { cartItems } = useSelector(state => state.cart)
     const increaseQuantity = (product_id, quantity, stock) => {
         const newQty = quantity + 1;
-        if (quantity < stock) return
+        if (quantity > stock) return
         dispatch(addItemsToCart(product_id, newQty))
     }
     const decreseQuantity = (product_id, quantity) => {
