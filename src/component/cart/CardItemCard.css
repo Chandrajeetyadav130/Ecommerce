@@ -22,3 +22,8 @@
 .cartinnerdiv>p:last-child:hover{
     color: #cb3131;
 }
+@media(max-width:600px){
+    .cardItemCard{
+        align-items: start;
+    }
+}

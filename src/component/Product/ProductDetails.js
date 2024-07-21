@@ -12,6 +12,7 @@ import { clearProductError } from "../../actions/productAction";
 import MetaData from "../layout/MetaData";
 import { useState } from "react";
 import { addItemsToCart } from "../../actions/cartAction";
+import { toast } from "react-toastify";
 const ProductDetails = () => {
     const [quantity, setQuantity] = useState(1)
     const alert = useAlert()
@@ -38,6 +39,7 @@ const ProductDetails = () => {
         // const qty = quantity;
 
         if (product.stock<=quantity){
+            toast("Sorry! we don't have more unit for this item")
             return
         }
         setQuantity(quantity=>quantity+1)
