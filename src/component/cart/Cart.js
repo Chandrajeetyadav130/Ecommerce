@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItemsToCart, removeItemFromCart } from "../../actions/cartAction";
 import { MdRemoveShoppingCart } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const Cart = () => {
     const navigate=useNavigate()
 
@@ -12,7 +13,10 @@ const Cart = () => {
     const { cartItems } = useSelector(state => state.cart)
     const increaseQuantity = (product_id, quantity, stock) => {
         const newQty = quantity + 1;
-        if (quantity > stock) return
+        if (quantity >= stock) {
+            toast("Sorry! we don't have more unit for this item")
+            return
+        }
         dispatch(addItemsToCart(product_id, newQty))
     }
     const decreseQuantity = (product_id, quantity) => {
@@ -49,8 +53,12 @@ const Cart = () => {
                             <div className="cartContainer my-4">
                                 <CartItemCard items={items} deletecartItem={deletecartItems} />
                                 <div className="cartInput">
+                                    
                                     <button onClick={() => decreseQuantity(items.product, items.quantity)}>-</button>
-                                    <input type="number" value={items.quantity} readOnly />
+                                    <div className="cart_input_divs">
+                                    <input className="cartInput" type="number" value={items.quantity} readOnly />
+
+                                    </div>
                                     <button onClick={() => increaseQuantity(items.product, items.quantity, items.stock)}>+</button>
                                 </div>
                                 <p className="subtotal">{`${items.price * items.quantity}`}</p>

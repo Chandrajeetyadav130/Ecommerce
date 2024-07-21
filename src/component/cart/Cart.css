@@ -41,21 +41,34 @@
 }
 .subtotal{
     text-align:end;
+    margin-right: 10px;
 }
 .cartInput{
     /* border: 1px solid rgb(233, 229, 229); */
     height:28px;
+    display: flex;
 }
 .cartInput>button{
     border: none;
-    width: 20px;
-    background-color: gray;
+    width: 28px;
+    background-color: #888585;
     color: white;
+    height: 28px;
+    border-radius: 100%;
 }
-.cartInput>input{
-    width: 3vmax;
+.cart_input_divs{
+    width: 40px;
+
+}
+.cartInput{
+    width:100%;
+    font-size: 14px;
+    font-weight: 500;
+    vertical-align: middle;
     text-align: center;
     border-style: none;
+    height: 28px;
+
 }
 
 .cartGrossProfit{

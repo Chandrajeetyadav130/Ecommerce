@@ -8,7 +8,7 @@ const CartItemCard=({items,deletecartItem})=>{
         <React.Fragment>
             <div className="cardItemCard">
              <img src={items.image} alt="cartitemiamge" />
-             <div className="">
+             <div className="cartinnerdiv">
                 <Link to={`/product/${items.product}`}/>
                 <p>{items.name}</p>
                 <span>{`${items.price}`}</span>

@@ -8,3 +8,17 @@
     width: 6vmax;
     height: 8vmax;
 }
+.cartinnerdiv{
+    height: 8vmax;
+}
+.cartinnerdiv>p{
+    margin-bottom: 0px;
+}
+.cartinnerdiv>p:last-child{
+    color: red;
+    font: 300 14px "roboto" ;
+    cursor: pointer;
+}
+.cartinnerdiv>p:last-child:hover{
+    color: #cb3131;
+}
