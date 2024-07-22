@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import "./loginSignup.css"
-import { login, clearError } from "../../actions/userAction"
+import { login, clearError, loadUser } from "../../actions/userAction"
 import { useSelector, useDispatch } from "react-redux"
 import { useAlert } from "react-alert"
 import { toast } from 'react-toastify';
@@ -17,7 +17,7 @@ const Login = () => {
     const [loginEmail, setLoginEmail] = useState("")
     const [loginPassword, setLoginPassword] = useState("")
     const redirect=location.search?location.search.split("=")[1]:"/account"
-
+console.log(error, loading, isAuthenticated );
     useEffect(() => {
         if (error) {
             toast(error)
@@ -26,8 +26,9 @@ const Login = () => {
         }
         if (isAuthenticated) {
             alert.success("Login Success")
-            navigate(redirect)
-            // navigate("/account")
+            // navigate(redirect)
+            dispatch(loadUser())
+             navigate("/account")
 
 
         }

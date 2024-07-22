@@ -30,6 +30,7 @@ const Products = () => {
     const [category, setCategory] = useState("")
     const [ratings, setRatings] = useState(0)
     const { product, loading, error, productCount, resultPerpage } = useSelector(state => state.product)
+    console.log(product)
     const dispatch = useDispatch()
     const setCurrentPageNo = (e) => {
         setCurrentPage(e)
@@ -50,7 +51,7 @@ const Products = () => {
         <React.Fragment>
             {loading ? (<Loader />) : (
                 <React.Fragment>
-                    <MetaData title={`${product.name}---Ecommerce`}/>
+                    <MetaData title={`${product?.name}---Ecommerce`}/>
                     <h2 className="products_heading">Products</h2>
                     <div className="products my-4">
                         {product &&

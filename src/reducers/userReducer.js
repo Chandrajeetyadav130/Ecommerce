@@ -64,6 +64,7 @@ export const userReducer = (state = { user: {},cookies:{} }, action) => {
             return {
                 ...state,
                 loading: false,
+                isAuthenticated: false,
                 error: action.payload
 
             }

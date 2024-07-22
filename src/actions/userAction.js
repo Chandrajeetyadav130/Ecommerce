@@ -1,5 +1,6 @@
 import axios from "axios"
-import { setToken, } from "./tokens";
+import { setToken } from "./tokens";
+import Cookies from 'js-cookie';
 import {
     LOGIN_REQUEST,
     LOGIN_FAIL,
@@ -23,9 +24,12 @@ import {
 }
     from "../constants/useConstant"
 // import Cookies from 'js-cookie';
-
-const baseUrl="https://ecommercebackend-hdlo.onrender.com"
-
+import { getCookie } from "./tokens";
+// const baseurl="http://localhost:4000/api/v1"
+const onlineUrl="https://ecommercebackend-hdlo.onrender.com/api/v1"
+const clearFrontendToken = () => {
+    Cookies.remove('token'); // Assuming 'authToken' is the cookie name
+};
 
 
     // Login action
@@ -34,12 +38,13 @@ export const login = (email, password) => {
         try {
             dispatch({ type: LOGIN_REQUEST })
             const config = { headers: { "Content-Type": "application/json" } }
-            const { data } = await axios.post(`${baseUrl}/api/v1/login`,
+            const { data } = await axios.post(`${onlineUrl}/login`,
                 { email, password },
                 config
             )
             dispatch({ type: LOGIN_SUCCESS,payload:data.user })
             setToken(data.token)
+            loadUser()
             // const gettokenfromapi=data.token;
             // console.log("api token",gettokenfromapi)
             // dispatch({type:SET_COOKIES,payload:data.token})
@@ -56,7 +61,7 @@ export const register = (userData) => {
         try {
             dispatch({ type: REGISTER_REQUEST })
             const config = { headers: { "Content-Type": "multipart/form-data" } }
-            const { data } = await axios.post(`${baseUrl}/api/v1/register`, userData, config)
+            const { data } = await axios.post(`${onlineUrl}/register`, userData, config)
         
 
             dispatch({ type: REGISTER_SUCCESS, payload: data.user })
@@ -74,8 +79,14 @@ export const loadUser = () => {
     return async (dispatch) => {
         try {
             dispatch({ type: LOAD_USER_REQUEST })
-            const { data } = await axios.get(`${baseUrl}/api/v1/me`)
-            console.log(data)
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${getCookie('token')}`
+                }
+            };
+            const { data } = await axios.get(`${onlineUrl}/me`,config)
+            // console.log(data)
 
             dispatch({ type: LOAD_USER_SUCCESS, payload:data.user })
 
@@ -88,13 +99,23 @@ export const loadUser = () => {
 export const logout = () => {
     return async (dispatch) => {
         try {
-            await axios.get(`${baseUrl}/api/v1/logout`)
-            
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getCookie('token')}`
+                }
+            };
+            await axios.get(`${onlineUrl}/logout`,config,{ withCredentials: true })
+
             dispatch({ type: LOGOUT_SUCCESS })
+            clearFrontendToken();
+
+
 
 
         } catch (error) {
-            dispatch({ type: LOGOUT_FAIL, payload: error.response.data.error })
+          console.log(error.response?.data?.error)
+            dispatch({ type: LOGOUT_FAIL, payload: error.response?.data?.error })
         }
     }
 }
@@ -104,11 +125,17 @@ export const updateProfile = (userData) => {
     return async (dispatch) => {
         try {
             dispatch({ type: UPDATE_PROFILE_REQUEST })
-            const config = { headers: { "Content-Type": "multipart/form-data" } }
-            const { data } = await axios.put(`${baseUrl}/api/v1/me/update`, userData, config)
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    "Authorization": `Bearer ${getCookie('token')}`
+                }
+            };
+            const { data } = await axios.put(`${onlineUrl}/me/update`, userData, config)
             console.log(data)
             dispatch({ type: UPDATE_PROFILE_SUCCESS, payload: data.success })
-        } catch (error) {
+        } catch (error) { 
+            console.log(error.response.data.error);
             dispatch({
                 type: UPDATE_PROFILE_FAIL,
                 payload: error.response.data.error
@@ -121,8 +148,14 @@ export const updatePassword = (passwords) => {
     return async (dispatch) => {
         try {
             dispatch({ type: UPDATE_PASSWORD_REQUEST })
-            const config = { headers: { "Content-Type": "application/json" } }
-            const { data } = await axios.put(`${baseUrl}/api/v1/password/update`, passwords, config)
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${getCookie('token')}`
+                }
+            };
+            // const config = { headers: { "Content-Type": "application/json" } }
+            const { data } = await axios.put(`${onlineUrl}/password/update`, passwords, config)
             console.log(data)
             dispatch({ type: UPDATE_PASSWORD_SUCCESS, payload: data.success })
         } catch (error) {

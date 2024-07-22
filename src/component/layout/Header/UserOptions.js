@@ -39,6 +39,7 @@ const UserOptions=({user})=>{
         navigate("/order")
     }
     function account(){
+        
         navigate("/account")
     }
     function cart(){
@@ -47,6 +48,7 @@ const UserOptions=({user})=>{
     function logoutuser(){
         dispatch(logout())
         toast("Logout successfully")
+
 
     }
 

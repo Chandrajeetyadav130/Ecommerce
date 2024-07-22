@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React, {useEffect}from "react"
 import MetaData from "../layout/MetaData"
 import { useSelector } from "react-redux"
 import Loader from "../layout/Loader/Loader"
@@ -10,9 +10,13 @@ const Profile = () => {
     useEffect(()=>{
       if(isAuthenticated===false){
         // <Navigate to={"/login"}/>
-         navigate("/login")
+         navigate("/")
       }
-    },[isAuthenticated,loading,navigate])
+      else{
+        navigate("/account")
+
+      }
+    },[loading,navigate,isAuthenticated])
     return (
         <React.Fragment>
             {loading ? <Loader /> : (

@@ -22,13 +22,18 @@ import UpdateProfile from './component/User/UpdateProfile.js';
 import UpdatePassword from './component/User/UpdatePassword.js';
 import ForgotPassword from './component/User/ForgotPassword.js';
 import Cart from './component/cart/Cart.js';
+import { getCookie } from './actions/tokens.js';
 function App() {
   const { user, isAuthenticated } = useSelector(state => state.userReducer)
-  console.log(user)
+  // console.log(user, isAuthenticated)
+  
+  const token = getCookie('token')
   useEffect(() => {
-    store.dispatch(loadUser())
+    if(token && !isAuthenticated){
+      store.dispatch(loadUser())
+    }
 
-  }, [])
+  }, [token,isAuthenticated])
   return (
     <Router>
       <Header />

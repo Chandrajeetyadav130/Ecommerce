@@ -22,11 +22,7 @@ const SignUp = () => {
             toast(error)
             dispatch(clearError())
           }
-        //   if(isAuthenticated){
-        //     // toast("Register Successfully")
-        //     navigate("/login")
-    
-        //    }
+       
       },[navigate,dispatch,error])
     const registerSubmit = (e) => {
         e.preventDefault()
